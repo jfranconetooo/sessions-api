@@ -93,7 +93,7 @@ $ npm run start:watch
 
 After your api is running access to see the openapi: `http://127.0.0.1:4000/docs`
 
-> You can use the following postman collection [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/1140279abd04cdd34f3a)
+> You can use the following postman collection [![Run in Postman]](https://app.getpostman.com/run-collection/1140279abd04cdd34f3a)
 
 ## Running the tests
 
