@@ -3,11 +3,9 @@ import { generateProfessionalsSessions, isTimeAvaiable } from './utils';
 import { ISchedule, ISessionsData, ISessions } from './interfaces';
 import { SessionsModel } from './models';
 
-
 export default class SessionsService {
 
     /**
-    * @module domain/sessions
     * @method [domain/sessions] list()
     * @description this method returns, from a professional, the available times for each date reserved
     * @param  {string} code
@@ -24,7 +22,6 @@ export default class SessionsService {
     }
 
     /**
-    * @module domain/sessions
     * @method [domain/sessions] create()
     * @description this method create,a session to a professional with their available times
     * @param  {object} body
@@ -36,7 +33,6 @@ export default class SessionsService {
     }
 
     /**
-    * @module domain/sessions
     * @method [domain/sessions] delete()
     * @description this method remove a professional session
     * @param  {string} code
@@ -48,7 +44,6 @@ export default class SessionsService {
     }
 
     /**
-    * @module domain/sessions
     * @method [domain/sessions] schedule()
     * @description this method make an appointement to a professional session
     * @param {string} code
@@ -72,5 +67,17 @@ export default class SessionsService {
             },
             {upsert: true }
         )
+    }
+
+    /**
+    * @method [domain/sessions] update()
+    * @description this method make a update in a specific session from an professional
+    * @param {string} code
+    * @param {object} payload
+    */
+    async update(code: string, payload: ISchedule): Promise<ISessionsData> {
+        const professional: any = await SessionsModel.findOneAndUpdate({_id: code}, payload, { new: true });
+        if(!professional) throw new NotFoundError("Not Found");
+        return professional;
     }
 }

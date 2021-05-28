@@ -93,7 +93,7 @@ $ npm run start:watch
 
 After your api is running access to see the openapi: `http://127.0.0.1:4000/docs`
 
-> You can use the following postman collection [![Run in Postman]](https://app.getpostman.com/run-collection/1140279abd04cdd34f3a)
+> You can use the following postman collection [![Postman]](https://app.getpostman.com/run-collection/1140279abd04cdd34f3a)
 
 ## Running the tests
 
@@ -102,10 +102,9 @@ After your api is running access to see the openapi: `http://127.0.0.1:4000/docs
 $ npm run test
 ```
 
-## Future improvements and features
+## To implements in the future
 
- - [ ] Endpoint to update availability information.
- - [ ] Validation of data before persisting on mongodb.
- - [ ] Allow exclusion of availability by slot or date.
- - [ ] Increase test cases.
- - [ ] Implement e2e tests to validate each enpoint for API.
+ - Validation of data before persisting on mongodb.
+ - Allow exclusion of availability by slot or date.
+ - Increase test cases.
+ - Implement e2e tests to validate each enpoint for API.

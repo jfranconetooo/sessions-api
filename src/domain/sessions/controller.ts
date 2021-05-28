@@ -27,10 +27,17 @@ export default () => {
         ctx.oK();
     }
 
+    const update = async (ctx: Context): Promise<void> => {
+        const { body } = ctx.request;
+        const { professionalCode } = ctx.params;
+        ctx.oK(await service.update(professionalCode, body));
+    }
+
     return {
         list,
         create,
         remove,
-        schedule
+        schedule,
+        update
     }
 }

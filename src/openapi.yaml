@@ -73,7 +73,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SessionCreate'
-
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /sessions/{professionalCode}:
     get:
       summary: Endpoint to obtain the availability in the current week of the professional informed by parameter.
@@ -87,6 +92,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SessionResponse'
+    patch:
+      summary: Endpoint to update professional availability times.
+      operationId: update-sessions
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionCreate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionCreate'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     delete:
       summary: Endpoint to delete the professional's schedules.
       operationId: delete-v1-sessions-professional
@@ -198,3 +227,9 @@ components:
         client:
           type: string
           example: "Mario"
+    Error:
+      title: Errora
+      type: string
+      example: "Not found"
+      
+          
