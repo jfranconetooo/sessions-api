@@ -2,9 +2,7 @@
 # Sessions API
 
 ## Summary
-
-This project was developed as a prerequisite in the selection process for a backend developer.
-The objective of the project is to provide an API so that professionals can provide days and times for sessions, in addition, so that clients can schedule their sessions according to the available times of the professional.
+This is a typescript API with objective to provide an API so that professionals can provide days and times for sessions, in addition, so that clients can schedule their sessions according to the available times of the professional.
 
 ## Roles
 
