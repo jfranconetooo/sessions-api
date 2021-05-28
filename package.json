@@ -1,0 +1,92 @@
+{
+  "name": "session-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "build": "npm run clean && tsc",
+    "clean": "rm -rf dist",
+    "start": "node dist/server.js",
+    "start:watch": "nodemon --trace-warnings",
+    "test": "jest --runInBand ",
+    "test:coverage": "npm test -- --coverage",
+    "test:ci": "lint-staged && npm test -- --coverage",
+    "test:staged": "npm test -- --passWithNoTests --silent --noStackTrace",
+    "test:watch": "jest --watch --silent --noStackTrace"
+  },
+  "keywords": [
+    "session",
+    "schedule"
+  ],
+  "author": "jfranconetooo@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "dotenv": "^10.0.0",
+    "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.1",
+    "koa-oas3": "^2.3.0",
+    "koa-response2": "^1.0.4",
+    "koa-router": "^10.0.0",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.11",
+    "mongoose-paginate-v2": "^1.3.18",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "@shopify/jest-koa-mocks": "^3.0.0",
+    "@types/jest": "^26.0.23",
+    "@types/koa": "^2.13.1",
+    "@types/koa__cors": "^3.0.2",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-json": "^2.0.18",
+    "@types/koa-logger": "^3.1.1",
+    "@types/koa-router": "^7.4.2",
+    "@types/mongoose-paginate-v2": "^1.3.9",
+    "@types/node": "^15.6.1",
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
+    "eslint": "^7.27.0",
+    "eslint-plugin-no-loops": "^0.3.0",
+    "husky": "^6.0.0",
+    "jest": "^27.0.1",
+    "lint-staged": "^11.0.0",
+    "mongodb-memory-server": "^6.9.6",
+    "ts-jest": "^27.0.1",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      ".gitignore",
+      ".eslintrc.json",
+      "node_modules",
+      "dist"
+    ],
+    "watch": [
+      "src/**/*.ts",
+      ".env"
+    ],
+    "exec": "ts-node --transpile-only ./src/server.ts",
+    "ext": "ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run test:ci"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint . --fix",
+      "npm run test:staged",
+      "git add"
+    ]
+  }
+}

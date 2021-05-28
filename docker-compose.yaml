@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  sessions-api:
+    container_name: session-api
+    build: .
+    ports:
+      - 4000:4000
+    environment:
+      NODE_ENV: develop
+      API_PORT: 4000
+      API_HOST: http://localhost
+      MONGO_URI: mongodb://mongo:27017/sessions
+
+    links:
+      - mongo
+    networks:
+      - mongo-compose-network
+
+  mongo:
+    image: mongo
+    container_name: mongo-container
+    ports:
+      - "27017:27017"
+    volumes:
+       - ./db:/data/db
+    networks:
+      - mongo-compose-network
+
+networks: 
+    mongo-compose-network:
+      driver: bridge

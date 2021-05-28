@@ -1,0 +1,200 @@
+openapi: 3.0.0
+info:
+  title: Sessions API
+  version: '1.0'
+  description: This project is an application challenge for professionals to manage their session schedules.
+  license:
+    name: MIT
+servers:
+  - url: 'http://127.0.0.1:4000'
+    description: development
+paths:
+  /:
+    get:
+      summary: Information about api
+      operationId: get
+      description: Returns informations if the API is running
+      tags:
+        - Info
+      responses:
+        200: 
+          description: Informations if the API is running.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Server`s session is running"
+  /health:
+    get:
+      summary: Informations about API Health
+      operationId: get-health
+      description: Returns informations about API Health
+      tags:
+        - Integrity
+      responses:
+        '200':
+          description: Informations about API Health.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  health:
+                    type: boolean
+    parameters: []
+  /sessions:
+    get:
+      summary: Endpoint to obtain the availability of all professionals.
+      operationId: get-sessions
+      tags:
+        - Sessions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+    post:
+      summary: Endpoint to create professional availability.
+      operationId: create-sessions
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionCreate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionCreate'
+
+  /sessions/{professionalCode}:
+    get:
+      summary: Endpoint to obtain the availability in the current week of the professional informed by parameter.
+      operationId: get-sessions-professional
+      tags:
+        - Sessions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+    delete:
+      summary: Endpoint to delete the professional's schedules.
+      operationId: delete-v1-sessions-professional
+      tags:
+        - Sessions
+      responses:
+        '204':
+          description: OK
+    parameters:
+      - in: path
+        name: professionalCode
+        required: true
+        schema:
+          type: string
+          minimum: 1
+        description: The professional ID
+  /sessions/schedule:
+    post:
+      summary: Endpoint for scheduling a session from a client to a professional.
+      operationId: post-sessions-schedule
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: ERROR
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    SessionResponse:
+      title: Professionals Availability Get
+      type: array
+      items:
+        type: object
+        properties:
+          professional:
+            type: object
+            properties:
+              name:
+                type: string
+              code:
+                type: string
+          availability:
+            type: array
+            items:
+              type: object
+              properties:
+                date:
+                  type: string
+                  example: "Monday May 31, 2021"
+                hours:
+                  type: array
+                  items:
+                    type: string
+                    example: 
+                      - "10:00"
+                      - "10:30"
+                      - "11:00"
+                      - "11:30"
+    SessionCreate:
+      title: Professionals Availability Create
+      type: object
+      properties:
+        professional:
+          type: string
+        availability:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                example: "Monday May 31, 2021"
+              interval_hours:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    startTime:
+                      type: string
+                      example: "10:00"
+                    endTime:
+                      type: string
+                      example: "13:00"
+    Schedule:
+      title: Client schedule to professional
+      type: object
+      properties:
+        date:
+          type: string
+          example: "Monday May 31, 2021"
+        hour:
+          type: string
+          example: "10:00"
+        client:
+          type: string
+          example: "Mario"
