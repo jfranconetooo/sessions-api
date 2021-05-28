@@ -19,7 +19,7 @@ This is a typescript API with objective to provide an API so that professionals 
 
 ## Environment
 
-- You can use Docker Compose to run the entire stack required for the application, if you are a docker user :whale:
+- You can use Docker Compose to run the entire stack required for the application, if you are a docker user
 More details below in the running section.
 - You can also run the application directly on your computer. Just have NodeJS 12+ installed and Mongodb 4+.
 
@@ -77,7 +77,7 @@ $ git clone git@github.com:jfranconetooo/sessions-api.git
 $ cd sessions-api
 ```
 
- >:warning: change the mongodb access information using the environment variables available in `.env` :file_folder:
+ >:warning: change the mongodb access information using the environment variables available in `.env`
 
 - Install all packages using NPM:
 ```sh
