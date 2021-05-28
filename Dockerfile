@@ -13,6 +13,7 @@ WORKDIR /app
 COPY package*.json ./
 COPY node_modules ./node_modules
 COPY --from=builder ./app/dist/ ./dist
+COPY src/openapi.yaml ./dist
 
 RUN npm prune --production
 
