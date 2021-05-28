@@ -101,9 +101,6 @@ After your api is running access to see the openapi: `http://127.0.0.1:4000/docs
 ```sh
 $ npm run test
 ```
-## Approaches taked that are not outlined in requirements
-
-- It is to schedule a session for any date.
 
 ## Future improvements and features
 
